@@ -28,3 +28,12 @@ ul.social-network {
   .faInstagram:hover{
   color: #C13584;
   }
+
+  .bg-color{
+    background-color: black;
+  }
+
+  .bg-copy
+  {
+    background-color: #b2639a;
+  }
