@@ -10,6 +10,9 @@ import { Tema } from '../model/Tema';
   styleUrls: ['./feed.component.css']
 })
 export class FeedComponent implements OnInit {
+
+  key = 'data'
+  reverse = true
   
   postagem: Postagem = new Postagem ()
   listaPostagens: Postagem[]
@@ -34,6 +37,23 @@ export class FeedComponent implements OnInit {
     this.postagemService.getAllPostagens().subscribe((resp: Postagem[]) => {
       this.listaPostagens = resp
     })
+  }
+
+  publicar () {
+    this.tema.id = this.idTema
+    this.postagem.tema = this.tema
+
+    if(this.postagem.titulo==null || this.postagem.texto == null || this.postagem.tema == null) {
+      alert ('Preencha todos os campos antes de publicar!')
+    } else {
+      this.postagemService.postPostagem(this.postagem).subscribe((resp: Postagem)=> {
+        this.postagem = resp
+        this.postagem = new Postagem()
+        alert ('Publicação realizada com sucesso!')
+        this.findAllPostagens()
+      })
+
+    }
   }
 
   findAllTemas (){
